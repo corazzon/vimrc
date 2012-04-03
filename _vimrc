@@ -30,6 +30,10 @@ endfunction
 
 colorscheme tango
 
+set fencs=utf-8,cp949,cp932,ucs-2le,shift-jis,big5,latin1,latin2
+set fenc=utf-8
+set bomb
+
 " 커서 위치 항상 보이기
 set ru
 완성중인 명령을 표시
@@ -48,4 +52,10 @@ set tabstop=4
 nmap <C-J> <C-w>j<C-W>_
 nmap <C-K> <C-W>k<C-W>_
 
+"  백업파일 생성 하지 않음
 set nobackup
+
+" 메뉴와 메시지창 한글 깨짐 문제 해결
+source $VIMRUNTIME/delmenu.vim
+set langmenu=ko.UTF-8
+source $VIMRUNTIME/menu.vim
