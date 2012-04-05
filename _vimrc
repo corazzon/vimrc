@@ -35,61 +35,51 @@ function MyDiff()
   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
 
-colorscheme tango
-
-if v:lang =~ "^ko"
-  set encoding=cp949
-  set fileencodings=utf-8,cp949
-  set guifontset=-*-*-medium-r-normal--16-*-*-*-*-*-*-*
-elseif v:lang =~ "^ja_JP"
-  set fileencodings=euc-jp
-  set guifontset=-misc-fixed-medium-r-normal--14-*-*-*-*-*-*-*
-elseif v:lang =~ "^zh_TW"
-  set fileencodings=big5
-  set guifontset=-sony-fixed-medium-r-normal--16-150-75-75-c-80-iso8859-1,-taipei-fixed-medium-r-normal--16-150-75-75-c-160-big5-0
-elseif v:lang =~ "^zh_CN"
-  set fileencodings=gb2312
-  set guifontset=*-r-*
-endif
-if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
-  set encoding=utf-8
-  set fileencodings=utf-8,cp949
-endif
-
-set bomb
+colorscheme torte
 
 " 커서 위치 항상 보이기
 set ru
+
 " 완성중인 명령을 표시
 set sc
 
 " 줄번호 표시
 set nu
 
-" 줄 번호 표시 너비 설정
-set nuw=5
+" 화면 우측 하단에 현재 커서의 위치 표시
+set ruler               
 
-" 탭 크기 설정
-set ts=4
-set tabstop=4
+" Tab 크기를 4로 설정
+set tabstop=4           
+
+" 자동들여쓰기 크기를 4로 설정
+set shiftwidth=4        
+
+" 이전 작업하던 라인을 기억한다.
+set history=999         
+
+set nocompatible
+
+" 자동으로 들여쓰기를 한다.
+set ai
+
+" 클립보드 복사, 붙여넣기
+map <C-c> "+y
+map <C-v> "+P
 
 nmap <C-J> <C-w>j<C-W>_
 nmap <C-K> <C-W>k<C-W>_
-
-"  백업파일 생성 하지 않음
+nmap <C-S> <C-C>:wq
+set wmh=0
+set ts=4
+set sw=4
 set nobackup
+set nowritebackup
+set paste
+set autoindent
+set guifont=Consolas:h11:cANSI
 
 " 메뉴와 메시지창 한글 깨짐 문제 해결
 source $VIMRUNTIME/delmenu.vim
 set langmenu=ko.UTF-8
 source $VIMRUNTIME/menu.vim
-
-" 파일 이전 편집 위치 유지
-if has("autocmd")
-    " When editing a file, always jump to the last cursor position
-    autocmd BufReadPost *
-    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-    \   exe "normal g'\"" |
-    \ endif
-endif
-
